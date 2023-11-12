@@ -1,0 +1,33 @@
+task:
+  freebsd_instance:
+    cpu: 4
+    memory: 16G
+    matrix:
+      # image_family: freebsd-13-2
+      - image_family: freebsd-14-0
+
+    env:
+      CIRRUS_CLONE_DEPTH: 1
+      # GITHUB_TOKEN: ENCRYPTED[...]
+
+    timeout_in: 90m
+    
+    prerequisites_script:
+      - uname -a
+      - ASSUME_ALWAYS_YES=yes pkg bootstrap -f
+      - pkg install -y git
+      - wget https://download.freebsd.org/releases/amd64/14.0-RC4/src.txz # NOTE: Change accordingly
+      - sudo tar xz src.txz  -C /
+      
+    build_script:
+      - git clone https://github.com/ventoy/Ventoy/
+      - cd ./Ventoy/Unix/ventoy_unix_src/FreeBSD/geom_ventoy_src/13.x/sys/modules/geom/geom_ventoy
+      - mkdir -p geom/ventoy
+      - cp ../../../geom/ventoy/* geom/ventoy
+      - cp ../../../geom/ventoy/* .
+      - export CC=$(which clang)
+      - make
+      - xz geom_ventoy.ko
+      
+    binary_artifacts:
+      path: "./Ventoy/Unix/ventoy_unix_src/FreeBSD/geom_ventoy_src/13.x/sys/modules/geom/geom_ventoy/ventoy.ko.gz"
