@@ -30,4 +30,4 @@ task:
     - xz geom_ventoy.ko
     
   binary_artifacts:
-    path: "./Ventoy/Unix/ventoy_unix_src/FreeBSD/geom_ventoy_src/13.x/sys/modules/geom/geom_ventoy/ventoy.ko.gz"
+    path: "./Ventoy/Unix/ventoy_unix_src/FreeBSD/geom_ventoy_src/13.x/sys/modules/geom/geom_ventoy/geom_ventoy.ko.gz"
