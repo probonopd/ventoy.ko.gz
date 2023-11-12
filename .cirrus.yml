@@ -28,7 +28,8 @@ task:
     - export CC=$(which clang)
     - make
     - xz geom_ventoy.ko
-    - mv binary/Ventoy/Unix/ventoy_unix_src/FreeBSD/geom_ventoy_src/13.x/sys/modules/geom/geom_ventoy/geom_ventoy.ko.xz .
+    - readlink -f ../../../../../../../../../../
+    - mv geom_ventoy.ko.xz ../../../../../../../../../../
     
   binary_artifacts:
     path: "./geom_ventoy.ko.xz"
