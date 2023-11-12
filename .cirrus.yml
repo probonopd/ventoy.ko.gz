@@ -17,7 +17,7 @@ task:
   prerequisites_script:
     - uname -a
     - ASSUME_ALWAYS_YES=yes pkg bootstrap -f
-    - pkg install -y git
+    - pkg install -y git wget
     - wget https://download.freebsd.org/releases/amd64/14.0-RC4/src.txz # NOTE: Change accordingly
     - sudo tar xz src.txz  -C /
     
